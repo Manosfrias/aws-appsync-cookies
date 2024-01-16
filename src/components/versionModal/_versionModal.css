@@ -1,0 +1,13 @@
+.close {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    transform: opacity .2s linear;
+}
+
+.close:hover {
+    opacity: 0.6;
+}
