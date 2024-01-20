@@ -1,14 +1,15 @@
-import { graphqlPort } from "./graphqlPort"
+import { graphqlClient } from "./graphqlClient"
 import { getCookieQuery } from "../querys/getCookieQuery"
 import { createCookieQuery } from "../querys/createCookieQuery"
 import { updateCookieQuery } from "../querys/updateCookieQuery"
 import { cookieParser } from "./cookieParser"
 
 export function cookieService(config) {
-    async function getCookie(cookie){
+
+    async function getCookieVersion(cookie){
         const userapp = `${cookie.user}-${cookie.app}`
 
-        return await graphqlPort(
+        return await graphqlClient(
             {
                 config,
                 body:{
@@ -24,7 +25,7 @@ export function cookieService(config) {
         const userapp = `${cookie.user}-${cookie.app}`
         const version = cookie.version
 
-        return await graphqlPort(
+        return await graphqlClient(
             {
                 config,
                 body:{
@@ -40,7 +41,7 @@ export function cookieService(config) {
         const userapp = `${cookie.user}-${cookie.app}`
         const version = cookie.version
 
-        return await graphqlPort(
+        return await graphqlClient(
             {
                 config,
                 body:{
@@ -53,7 +54,7 @@ export function cookieService(config) {
     }
 
     return {
-        getCookie,
+        getCookieVersion,
         createCookie,
         updateCookie
     }

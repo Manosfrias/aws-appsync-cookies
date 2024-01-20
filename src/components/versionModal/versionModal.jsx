@@ -3,13 +3,18 @@ import Markdown from "react-markdown";
 import ReactModal from "react-modal";
 import close from "./close.png";
 import "./_versionModal.css";
+import { API_CONNECTION } from "../../config/apiConnection";
+import { cookieService } from "../../utils/cookie";
 
-export function VersionModal({ cookieData, markdown, manageCookies }) {
+export function VersionModal({ cookieData, markdown }) {
+  const manageCookies = cookieService(API_CONNECTION);
+
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState("cancel");
-  const __updateCookie = manageCookies?.updateCookie;
-  const __getCookie = manageCookies?.getCookie;
-  const __createCookie = manageCookies?.createCookie;
+
+  const __updateCookie = manageCookies.updateCookie;
+  const __getCookieVersion = manageCookies.getCookieVersion;
+  const __createCookie = manageCookies.createCookie;
 
   const handleClose = () => {
     setOpen(!open);
@@ -25,13 +30,9 @@ export function VersionModal({ cookieData, markdown, manageCookies }) {
 
   useEffect(() => {
     const initialModalState = async () => {
-      const initialCookie = await __getCookie(cookieData);
+      const initialCookie = await __getCookieVersion(cookieData);
 
-      if (
-        initialCookie?.user === cookieData.user &&
-        initialCookie?.app === cookieData.app &&
-        initialCookie?.version === cookieData.version
-      ) {
+      if (initialCookie?.version === cookieData.version) {
         return null;
       }
 
@@ -44,7 +45,7 @@ export function VersionModal({ cookieData, markdown, manageCookies }) {
       return setStatus("update");
     };
     initialModalState();
-  }, [cookieData, __getCookie]);
+  }, [cookieData, __getCookieVersion]);
 
   return (
     <ReactModal isOpen={open} contentLabel="version modal">

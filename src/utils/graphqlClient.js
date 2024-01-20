@@ -1,6 +1,7 @@
 import { fetchGraphqlData } from "./fetchGraphqlData";
 
-export async function graphqlPort(queryconfig, dataParser){
+export async function graphqlClient(queryconfig, dataParser){
+
     const data = await fetchGraphqlData(queryconfig)
 
     if(!data) {

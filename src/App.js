@@ -1,22 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from './assets/img/logo.svg';
+import './assets/styles/App.css';
 import { VersionModal } from './components/versionModal/versionModal';
-import { cookieService } from './utils/cookie';
 import changelog from "./version.md"
 import { useMarkdownToText } from './hooks/useMarkdownToText';
-import { API_CONNECTION } from './config/apiConnection';
-
 
 const COOKIE_DATA = {
   app: "myApp",
   user: "ana",
-  version: "0.0.1"
+  version: "0.0.3"
 }
 
 function App() {
   return (
     <div className="App">
-      <VersionModal cookieData={COOKIE_DATA} markdown={useMarkdownToText(changelog)} manageCookies={cookieService(API_CONNECTION)} />
+      <VersionModal cookieData={COOKIE_DATA} 
+                    markdown={useMarkdownToText(changelog)} 
+      />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
