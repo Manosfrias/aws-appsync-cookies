@@ -23,4 +23,7 @@ export async function fetchGraphqlData(queryconfig){
     }
 
     return parsedData;
+
+
+    
 }
